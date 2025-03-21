@@ -42,8 +42,8 @@
       "themeColor": "#000000"
     },
     "icon": "./assets/app/icon.png",
-    "name": "My App 80",
-    "slug": "my-app-80",
+    "name": "My App 93",
+    "slug": "my-app-93",
     "extra": {
       "eas": {
         "projectId": ""

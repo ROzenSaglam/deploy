@@ -21,7 +21,9 @@ const linking = {
   enabled: Platform.OS === 'web' ? false : true,
   prefixes: [prefix],
   config: {
-    screens: {},
+    screens: {
+      BottomTabNavigator: { screens: {} },
+    },
   },
 };
 
