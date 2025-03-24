@@ -9,7 +9,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { systemWeights } from 'react-native-typography';
 import LinkingConfiguration from './LinkingConfiguration';
 import BlankScreen from './screens/BlankScreen';
-import ItemDetailsScreen from './screens/ItemDetailsScreen';
 import palettes from './themes/palettes';
 import Breakpoints from './utils/Breakpoints';
 import useWindowDimensions from './utils/useWindowDimensions';
@@ -47,63 +46,6 @@ function DefaultDrawerIcon({ tintColor, navigation }) {
   );
 }
 
-function BottomTabNavigator() {
-  const theme = useTheme();
-
-  const tabBarOrDrawerIcons = {
-    ItemDetailsScreen: 'AntDesign/downcircle',
-    BlankScreen: '',
-  };
-
-  return (
-    <Tab.Navigator
-      screenOptions={({ navigation }) => ({
-        headerShown: false,
-        headerStyle: {
-          backgroundColor: theme.colors.background.base,
-          borderBottomColor: 'transparent',
-        },
-        headerTintColor: theme.colors.text.strong,
-        headerTitleStyle: theme.typography.headline5,
-        tabBarActiveTintColor: theme.colors.branding.primary,
-        tabBarInactiveTintColor: theme.colors.text.light,
-        tabBarLabelStyle: theme.typography.caption,
-        tabBarStyle: {
-          backgroundColor: theme.colors.background.base,
-          borderTopColor: 'transparent',
-        },
-      })}
-    >
-      <Tab.Screen
-        name="ItemDetailsScreen"
-        component={ItemDetailsScreen}
-        options={({ navigation }) => ({
-          tabBarIcon: ({ focused, color }) => (
-            <Icon
-              name="AntDesign/downcircle"
-              size={25}
-              color={
-                focused
-                  ? theme.colors.branding.primary
-                  : theme.colors.text.light
-              }
-            />
-          ),
-          tabBarLabel: 'Home',
-          title: 'Item Details',
-        })}
-      />
-      <Tab.Screen
-        name="BlankScreen"
-        component={BlankScreen}
-        options={({ navigation }) => ({
-          title: 'Blank',
-        })}
-      />
-    </Tab.Navigator>
-  );
-}
-
 export default function RootAppNavigator() {
   const theme = useTheme();
 
@@ -123,19 +65,13 @@ export default function RootAppNavigator() {
           cardStyle: { flex: 1 },
           headerBackImage:
             Platform.OS === 'android' ? DefaultAndroidBackIcon : null,
-          headerStyle: {
-            backgroundColor: theme.colors.background.base,
-            borderBottomColor: 'transparent',
-          },
-          headerTintColor: theme.colors.text.strong,
-          headerTitleStyle: theme.typography.headline5,
         })}
       >
         <Stack.Screen
-          name="BottomTabNavigator"
-          component={BottomTabNavigator}
+          name="BlankScreen"
+          component={BlankScreen}
           options={({ navigation }) => ({
-            title: 'Bottom Tab Navigator',
+            title: 'Blank',
           })}
         />
       </Stack.Navigator>

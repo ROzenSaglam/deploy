@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Provider as ThemeProvider } from '@draftbit/ui';
-import { useFonts } from 'expo-font';
 import * as Notifications from 'expo-notifications';
 import * as SplashScreen from 'expo-splash-screen';
 import {
@@ -21,10 +20,9 @@ import {
 } from 'react-native-safe-area-context';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import AppNavigator from './AppNavigator';
-import Fonts from './config/Fonts.js';
 import { GlobalVariableProvider } from './config/GlobalVariableContext';
 import cacheAssetsAsync from './config/cacheAssetsAsync';
-import DraftbitDefault from './themes/DraftbitDefault';
+import Draftbit from './themes/Draftbit';
 import useWindowDimensions from './utils/useWindowDimensions';
 
 SplashScreen.preventAutoHideAsync();
@@ -92,11 +90,7 @@ if (Platform.OS === 'web') {
 
 const App = () => {
   const [areAssetsCached, setAreAssetsCached] = React.useState(false);
-
-  const [fontsLoaded] = useFonts({
-    Inter_400Regular: Fonts.Inter_400Regular,
-    Inter_500Medium: Fonts.Inter_500Medium,
-  });
+  const fontsLoaded = true;
 
   React.useEffect(() => {
     async function prepare() {
@@ -148,9 +142,9 @@ const App = () => {
         />
       ) : null}
       <ThemeProvider
-        themes={[DraftbitDefault]}
+        themes={[Draftbit]}
         breakpoints={{}}
-        initialThemeName={'Draftbit Default'}
+        initialThemeName={'Draftbit'}
       >
         <SafeAreaProvider
           initialMetrics={initialWindowMetrics}
