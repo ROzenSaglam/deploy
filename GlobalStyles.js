@@ -17,3 +17,8 @@ export const ButtonStyles = theme =>
       props: {},
     },
   });
+
+export const ExpoImageStyles = theme =>
+  StyleSheet.create({
+    Image: { style: { height: 100, width: 100 }, props: {} },
+  });

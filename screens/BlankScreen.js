@@ -1,9 +1,11 @@
 import React from 'react';
-import { Picker, ScreenContainer, withTheme } from '@draftbit/ui';
+import { ExpoImage, Picker, ScreenContainer, withTheme } from '@draftbit/ui';
 import { useIsFocused } from '@react-navigation/native';
+import * as GlobalStyles from '../GlobalStyles.js';
 import palettes from '../themes/palettes';
 import Breakpoints from '../utils/Breakpoints';
 import * as StyleSheet from '../utils/StyleSheet';
+import imageSource from '../utils/imageSource';
 import useWindowDimensions from '../utils/useWindowDimensions';
 
 const defaultProps = { test: null };
@@ -33,37 +35,22 @@ const BlankScreen = props => {
         dimensions.width
       )}
     >
-      <Picker
-        autoDismissKeyboard={true}
-        dropDownBackgroundColor={theme.colors.background.base}
-        dropDownBorderColor={theme.colors.border.base}
-        dropDownBorderRadius={8}
-        dropDownBorderWidth={1}
-        dropDownTextColor={theme.colors.text.strong}
-        leftIconMode={'inset'}
-        onValueChange={newPickerValue => {
-          const pickerValue = newPickerValue;
-          try {
-            setPickerValue(newPickerValue);
-          } catch (err) {
-            console.error(err);
-          }
-        }}
-        placeholder={'Select an option'}
-        selectedIconColor={theme.colors.text.strong}
-        selectedIconName={'Feather/check'}
-        selectedIconSize={20}
-        type={'solid'}
-        dropdownOverlayColor={theme.colors.branding.secondary}
-        iconColor={theme.colors.branding.primary}
-        iconSize={16}
-        leftIconName={'AntDesign/pluscircle'}
-        mode={'dropdown'}
+      <ExpoImage
+        allowDownscaling={true}
+        cachePolicy={'disk'}
+        contentPosition={'center'}
+        resizeMode={'cover'}
+        source={imageSource(
+          'https://static.draftbit.com/images/placeholder-image.png'
+        )}
+        transitionDuration={300}
+        transitionEffect={'cross-dissolve'}
+        transitionTiming={'ease-in-out'}
+        {...GlobalStyles.ExpoImageStyles(theme)['Image'].props}
         style={StyleSheet.applyWidth(
-          { paddingBottom: 0, paddingLeft: 0, paddingRight: 0, paddingTop: 0 },
+          GlobalStyles.ExpoImageStyles(theme)['Image'].style,
           dimensions.width
         )}
-        value={pickerValue}
       />
     </ScreenContainer>
   );
