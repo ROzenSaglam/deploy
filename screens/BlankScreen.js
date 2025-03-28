@@ -1,5 +1,11 @@
 import React from 'react';
-import { ExpoImage, Picker, ScreenContainer, withTheme } from '@draftbit/ui';
+import {
+  DatePicker,
+  ExpoImage,
+  Picker,
+  ScreenContainer,
+  withTheme,
+} from '@draftbit/ui';
 import { useIsFocused } from '@react-navigation/native';
 import * as GlobalStyles from '../GlobalStyles.js';
 import palettes from '../themes/palettes';
@@ -13,7 +19,9 @@ const defaultProps = { test: null };
 const BlankScreen = props => {
   const { theme } = props;
   const dimensions = useWindowDimensions();
+  const [datePickerValue, setDatePickerValue] = React.useState(new Date());
   const [pickerValue, setPickerValue] = React.useState('');
+  const [date, setDate] = React.useState(new Date());
   const isFocused = useIsFocused();
   React.useEffect(() => {
     try {
@@ -35,20 +43,31 @@ const BlankScreen = props => {
         dimensions.width
       )}
     >
-      <ExpoImage
-        allowDownscaling={true}
-        cachePolicy={'disk'}
-        contentPosition={'center'}
-        resizeMode={'cover'}
-        source={imageSource(
-          'https://static.draftbit.com/images/placeholder-image.png'
-        )}
-        transitionDuration={300}
-        transitionEffect={'cross-dissolve'}
-        transitionTiming={'ease-in-out'}
-        {...GlobalStyles.ExpoImageStyles(theme)['Image'].props}
+      <DatePicker
+        autoDismissKeyboard={true}
+        disabled={false}
+        hideLabel={false}
+        inline={false}
+        label={'Date'}
+        leftIconMode={'inset'}
+        mode={'date'}
+        onDateChange={newDatePickerValue => {
+          const date = newDatePickerValue;
+          try {
+            setDatePickerValue(newDatePickerValue);
+          } catch (err) {
+            console.error(err);
+          }
+        }}
+        type={'solid'}
+        {...GlobalStyles.DatePickerStyles(theme)['Date Picker'].props}
+        date={datePickerValue}
         style={StyleSheet.applyWidth(
-          GlobalStyles.ExpoImageStyles(theme)['Image'].style,
+          StyleSheet.compose(
+            GlobalStyles.DatePickerStyles(theme)['Date Picker'].style,
+            theme.typography.body2,
+            {}
+          ),
           dimensions.width
         )}
       />

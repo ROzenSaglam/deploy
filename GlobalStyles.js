@@ -22,3 +22,6 @@ export const ExpoImageStyles = theme =>
   StyleSheet.create({
     Image: { style: { height: 100, width: 100 }, props: {} },
   });
+
+export const DatePickerStyles = theme =>
+  StyleSheet.create({ 'Date Picker': { style: {}, props: {} } });
