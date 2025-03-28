@@ -8,6 +8,7 @@ import {
 } from '@draftbit/ui';
 import { useIsFocused } from '@react-navigation/native';
 import * as GlobalStyles from '../GlobalStyles.js';
+import * as GlobalVariables from '../config/GlobalVariableContext';
 import palettes from '../themes/palettes';
 import Breakpoints from '../utils/Breakpoints';
 import * as StyleSheet from '../utils/StyleSheet';
@@ -19,9 +20,19 @@ const defaultProps = { test: null };
 const BlankScreen = props => {
   const { theme } = props;
   const dimensions = useWindowDimensions();
+  const Constants = GlobalVariables.useValues();
+  const Variables = Constants;
   const [datePickerValue, setDatePickerValue] = React.useState(new Date());
   const [pickerValue, setPickerValue] = React.useState('');
   const [date, setDate] = React.useState(new Date());
+  const myFunctionName = date => {
+    if (date === null || date === undefined || date === '') {
+      return null;
+    }
+    const dateData = new Date(date);
+    console.log(dateData);
+    return dateData;
+  };
   const isFocused = useIsFocused();
   React.useEffect(() => {
     try {
@@ -61,7 +72,7 @@ const BlankScreen = props => {
         }}
         type={'solid'}
         {...GlobalStyles.DatePickerStyles(theme)['Date Picker'].props}
-        date={datePickerValue}
+        date={myFunctionName(datePickerValue)}
         style={StyleSheet.applyWidth(
           StyleSheet.compose(
             GlobalStyles.DatePickerStyles(theme)['Date Picker'].style,
