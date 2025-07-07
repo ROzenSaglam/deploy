@@ -6,13 +6,15 @@ import {
   ScreenContainer,
   withTheme,
 } from '@draftbit/ui';
-import { useIsFocused } from '@react-navigation/native';
 import * as GlobalStyles from '../GlobalStyles.js';
 import * as GlobalVariables from '../config/GlobalVariableContext';
 import palettes from '../themes/palettes';
 import Breakpoints from '../utils/Breakpoints';
 import * as StyleSheet from '../utils/StyleSheet';
 import imageSource from '../utils/imageSource';
+import useIsFocused from '../utils/useIsFocused';
+import useNavigation from '../utils/useNavigation';
+import useParams from '../utils/useParams';
 import useWindowDimensions from '../utils/useWindowDimensions';
 
 const defaultProps = { test: null };
@@ -20,6 +22,7 @@ const defaultProps = { test: null };
 const BlankScreen = props => {
   const { theme } = props;
   const dimensions = useWindowDimensions();
+  const params = useParams();
   const Constants = GlobalVariables.useValues();
   const Variables = Constants;
   const [datePickerValue, setDatePickerValue] = React.useState(new Date());

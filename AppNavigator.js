@@ -11,6 +11,7 @@ import LinkingConfiguration from './LinkingConfiguration';
 import BlankScreen from './screens/BlankScreen';
 import palettes from './themes/palettes';
 import Breakpoints from './utils/Breakpoints';
+import useNavigation from './utils/useNavigation';
 import useWindowDimensions from './utils/useWindowDimensions';
 
 const Stack = createStackNavigator();
@@ -30,7 +31,8 @@ function DefaultAndroidBackIcon({ tintColor }) {
   );
 }
 
-function DefaultDrawerIcon({ tintColor, navigation }) {
+function DefaultDrawerIcon({ tintColor }) {
+  const navigation = useNavigation();
   return (
     <Touchable
       onPress={() => navigation.toggleDrawer()}
@@ -61,18 +63,18 @@ export default function RootAppNavigator() {
       linking={LinkingConfiguration}
     >
       <Stack.Navigator
-        screenOptions={({ navigation }) => ({
+        screenOptions={{
           cardStyle: { flex: 1 },
           headerBackImage:
             Platform.OS === 'android' ? DefaultAndroidBackIcon : null,
-        })}
+        }}
       >
         <Stack.Screen
           name="BlankScreen"
           component={BlankScreen}
-          options={({ navigation }) => ({
+          options={{
             title: 'Blank',
-          })}
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

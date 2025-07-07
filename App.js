@@ -79,7 +79,7 @@ if (Platform.OS === 'web') {
     });
     observer.observe(document.documentElement, { attributes: true });
 
-    function remove(): void {
+    function remove() {
       systemValue.removeEventListener('change', systemValueListener);
       observer.disconnect();
     }
