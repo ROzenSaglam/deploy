@@ -9,6 +9,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { systemWeights } from 'react-native-typography';
 import LinkingConfiguration from './LinkingConfiguration';
 import BlankScreen from './screens/BlankScreen';
+import DeliveryScreen from './screens/DeliveryScreen';
 import palettes from './themes/palettes';
 import Breakpoints from './utils/Breakpoints';
 import useNavigation from './utils/useNavigation';
@@ -48,6 +49,63 @@ function DefaultDrawerIcon({ tintColor }) {
   );
 }
 
+function BottomTabNavigator() {
+  const theme = useTheme();
+
+  const tabBarOrDrawerIcons = {
+    DeliveryScreen: 'FontAwesome/home',
+    BlankScreen: '',
+  };
+
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        headerStyle: {
+          backgroundColor: theme.colors.background.base,
+          borderBottomColor: 'transparent',
+        },
+        headerTintColor: theme.colors.text.strong,
+        headerTitleStyle: theme.typography.headline5,
+        tabBarActiveTintColor: theme.colors.branding.primary,
+        tabBarInactiveTintColor: theme.colors.text.light,
+        tabBarLabelStyle: theme.typography.caption,
+        tabBarStyle: {
+          backgroundColor: theme.colors.background.base,
+          borderTopColor: 'transparent',
+        },
+      }}
+    >
+      <Tab.Screen
+        name="DeliveryScreen"
+        component={DeliveryScreen}
+        options={{
+          tabBarIcon: ({ focused, color }) => (
+            <Icon
+              name="FontAwesome/home"
+              size={25}
+              color={
+                focused
+                  ? theme.colors.branding.primary
+                  : theme.colors.text.light
+              }
+            />
+          ),
+          tabBarLabel: 'Home',
+          title: 'Delivery',
+        }}
+      />
+      <Tab.Screen
+        name="BlankScreen"
+        component={BlankScreen}
+        options={{
+          title: 'Blank',
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
+
 export default function RootAppNavigator() {
   const theme = useTheme();
 
@@ -70,10 +128,10 @@ export default function RootAppNavigator() {
         }}
       >
         <Stack.Screen
-          name="BlankScreen"
-          component={BlankScreen}
+          name="BottomTabNavigator"
+          component={BottomTabNavigator}
           options={{
-            title: 'Blank',
+            title: 'Bottom Tab Navigator',
           }}
         />
       </Stack.Navigator>

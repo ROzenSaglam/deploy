@@ -8,7 +8,9 @@ import {
 } from '@draftbit/ui';
 import * as GlobalStyles from '../GlobalStyles.js';
 import * as GlobalVariables from '../config/GlobalVariableContext';
+import * as CustomCode from '../custom-files/CustomCode';
 import palettes from '../themes/palettes';
+import * as Utils from '../utils';
 import Breakpoints from '../utils/Breakpoints';
 import * as StyleSheet from '../utils/StyleSheet';
 import imageSource from '../utils/imageSource';
@@ -57,34 +59,9 @@ const BlankScreen = props => {
         dimensions.width
       )}
     >
-      <DatePicker
-        autoDismissKeyboard={true}
-        disabled={false}
-        hideLabel={false}
-        inline={false}
-        label={'Date'}
-        leftIconMode={'inset'}
-        mode={'date'}
-        onDateChange={newDatePickerValue => {
-          const date = newDatePickerValue;
-          try {
-            setDatePickerValue(newDatePickerValue);
-          } catch (err) {
-            console.error(err);
-          }
-        }}
-        type={'solid'}
-        {...GlobalStyles.DatePickerStyles(theme)['Date Picker'].props}
-        date={myFunctionName(datePickerValue)}
-        style={StyleSheet.applyWidth(
-          StyleSheet.compose(
-            GlobalStyles.DatePickerStyles(theme)['Date Picker'].style,
-            theme.typography.body2,
-            {}
-          ),
-          dimensions.width
-        )}
-      />
+      <Utils.CustomCodeErrorBoundary>
+        <CustomCode.MyExampleComponent />
+      </Utils.CustomCodeErrorBoundary>
     </ScreenContainer>
   );
 };
