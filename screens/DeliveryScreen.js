@@ -242,7 +242,7 @@ const DeliveryScreen = props => {
               <Touchable
                 onPress={() => {
                   try {
-                    navigation.navigate('BlankScreen');
+                    navigation.navigate('BottomTabNavigator');
                   } catch (err) {
                     console.error(err);
                   }

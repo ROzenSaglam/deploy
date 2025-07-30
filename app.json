@@ -60,10 +60,7 @@
       "permissions": [],
       "versionCode": 1,
       "adaptiveIcon": {},
-      "blockedPermissions": [
-        "android.permission.READ_MEDIA_IMAGES",
-        "android.permission.READ_MEDIA_VIDEO"
-      ]
+      "blockedPermissions": []
     },
     "plugins": [
       [
